@@ -47,7 +47,13 @@ const App = () => {
     }
   ]
   
-  return <Course course={courses} />
+  return(
+    <div>
+      <h1>Web development curriculum</h1>
+  {courses.map(item =>
+  <Course key={item.id} course={item} />)}
+  </div>
+  )
 }
 
 export default App
