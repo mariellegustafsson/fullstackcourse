@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import namefilter from './components/namefilter'
 import addNames from './components/addnames'
+import RenderNames from './components/renderNames'
 
 
 const App = () => {
@@ -53,8 +54,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <ul>
-        {namefilter({persons}, {searchName}).map((person) => 
-        <li key={person.name}>  {person.name} {person.number}</li>)}
+        <RenderNames names={namefilter({persons}, {searchName})} />
       </ul>
     </div>
   )
