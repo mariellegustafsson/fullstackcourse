@@ -1,3 +1,5 @@
+
+import nameService from '../services/name'
 const addNames = ({newName}, {persons}, {newNumber}, {setPersons}) => {
 
 if (persons.some((person) => newName === person.name)){ 
@@ -5,9 +7,12 @@ if (persons.some((person) => newName === person.name)){
 }
 else{
   const Object = {name: newName, number: newNumber,}
-    setPersons(persons.concat(Object))
-}
+  nameService.create(Object)
+  .then(returnedObject => {
+    setPersons(persons.concat(returnedObject))
+  })
+}}
 
-}
+
 
 export default addNames

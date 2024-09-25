@@ -3,6 +3,7 @@ import namefilter from './components/namefilter'
 import addNames from './components/addnames'
 import RenderNames from './components/renderNames'
 import axios from 'axios'
+import nameService from './services/name'
 
 
 const App = () => {
@@ -35,17 +36,12 @@ const App = () => {
   }
 
 
-
   useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersons(response.data)
+      nameService.getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
       })
   }, [])
-
 
 
   return (
