@@ -1,14 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import namefilter from './components/namefilter'
 import addNames from './components/addnames'
 import RenderNames from './components/renderNames'
+import axios from 'axios'
 
 
 const App = () => {
 
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number:'0' }
-  ]) 
+  const [persons, setPersons] = useState([]) 
+ /* { name: 'Arto Hellas', number:'0' }*/
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchName, setSearchName] = useState('')
@@ -33,6 +33,19 @@ const App = () => {
     console.log('button clicked', event.target)
     addNames({newName}, {persons}, {newNumber}, {setPersons})
   }
+
+
+
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('promise fulfilled')
+        setPersons(response.data)
+      })
+  }, [])
+
 
 
   return (
