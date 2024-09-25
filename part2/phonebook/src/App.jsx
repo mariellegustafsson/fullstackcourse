@@ -1,7 +1,7 @@
 import { useState } from 'react'
-/*import namefilter from './components/namefilter'
-import addName from './components/addnames'
-*/
+import namefilter from './components/namefilter'
+import addNames from './components/addnames'
+
 
 const App = () => {
 
@@ -30,20 +30,8 @@ const App = () => {
   const addName = (event) => {
     event.preventDefault()
     console.log('button clicked', event.target)
-    
-if (persons.some((person) => newName === person.name)){ 
-  alert(`${newName} already in phonebook`)
-}
-else{
-  const Object = {name: newName, number: newNumber,}
-    setPersons(persons.concat(Object))
-}}
-
-const namefilter = ({persons}) => {
-  return persons.filter(person => 
-    person.name.toLowerCase().includes(searchName.toLowerCase())
-  );
-}
+    addNames({newName}, {persons}, {newNumber}, {setPersons})
+  }
 
 
   return (
@@ -63,12 +51,9 @@ const namefilter = ({persons}) => {
           <button type="submit">add</button>
         </div>
       </form>
-      <div>debug: {newName} 
-      </div>
       <h2>Numbers</h2>
       <ul>
-        
-        {namefilter({persons}).map((person) => 
+        {namefilter({persons}, {searchName}).map((person) => 
         <li key={person.name}>  {person.name} {person.number}</li>)}
       </ul>
     </div>

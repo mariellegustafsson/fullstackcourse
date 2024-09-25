@@ -1,7 +1,7 @@
-const namefilter = ({persons}) => {
-    return persons.filter(person => 
-      person.name.toLowerCase().includes(searchName.toLowerCase())
-    );
-  }
+const namefilter = ({persons}, {searchName}) => {
+  return persons.filter(person => 
+    person.name.toLowerCase().includes(searchName.toLowerCase())
+  );
+}
 
-  export default namefilter
+export default namefilter
