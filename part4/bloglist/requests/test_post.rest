@@ -3,8 +3,8 @@ Content-Type: application/json
 
 
 {
-  "title": "today's news",
-  "author": "marielle",
-  "url": "news.com",
-  "likes": 3
+  "title": "my day",
+  "author": "agnes",
+  "url": "blog.com",
+  "likes": 5
 }
