@@ -1,4 +1,4 @@
-/*const logger = require('./logger')
+const logger = require('./logger')
 
 const requestLogger = (request, response, next) => {
   logger.info('Method:', request.method)
@@ -29,4 +29,3 @@ module.exports = {
   unknownEndpoint,
   errorHandler
 }
-  */
