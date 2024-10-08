@@ -82,6 +82,33 @@ test('a blogpost can be deleted', async () => {
     assert.strictEqual(blogsAtEnd.length, blogsAtStart.length-1)
     })
 
+test('a blogpost can be edited', async () => {
+    const initialResponse = await api.get('/api/blogs')
+    const blogsAtStart = initialResponse.body
+    const blogToEdit = blogsAtStart[0]
+    const initialLikes = blogToEdit.likes
+
+    const editedBlog = {
+        title: blogToEdit.title,
+        author: blogToEdit.author,
+        url: blogToEdit.url,
+        likes: initialLikes + 1
+    }
+    
+    await api
+    .put(`/api/blogs/${blogToEdit.id}`)
+    .send(editedBlog)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+    const finalResponse = await api.get('/api/blogs')
+    const blogsAtEnd = finalResponse.body
+    const finalLikes = blogsAtEnd[0].likes
+
+    assert.strictEqual(finalLikes, initialLikes+1)
+
+    })
+
 
 
 after(async () => {
