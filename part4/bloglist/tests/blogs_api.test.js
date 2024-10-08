@@ -32,18 +32,18 @@ const initialBlogs = [
 
 
 
-test.only('there are two blogs', async () => {
+test('there are two blogs', async () => {
     const response = await api.get('/api/blogs')
     assert.strictEqual(response.body.length, 2)
   })
   
 
-test.only("the unique identifier is named id", async () =>{
+test("the unique identifier is named id", async () =>{
     const response = await api.get('/api/blogs')
     assert.strictEqual((Object.keys(response.body[0]))[4], "id")
 })
 
-test.only("a new blogpost can be created", async () => {
+test("a new blogpost can be created", async () => {
 
     const newBlog = {
         title: "test blog",
@@ -64,6 +64,22 @@ test.only("a new blogpost can be created", async () => {
     const response = await api.get('/api/blogs')
     assert.equal(response.body.length, initialAmount+1)
     
+    })
+
+
+test('a blogpost can be deleted', async () => {
+    const initialResponse = await api.get('/api/blogs')
+    const blogsAtStart = initialResponse.body
+    const blogToDelete = blogsAtStart[0]
+    
+    await api
+        .delete(`/api/blogs/${blogToDelete.id}`)
+        .expect(204)
+    
+    const endResponse = await api.get('/api/blogs')
+    const blogsAtEnd = endResponse.body
+ 
+    assert.strictEqual(blogsAtEnd.length, blogsAtStart.length-1)
     })
 
 
