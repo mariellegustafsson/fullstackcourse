@@ -109,6 +109,25 @@ test('a blogpost can be edited', async () => {
 
     })
 
+test("when a new blogpost is created with the likes property missing, default is 0", async () => {
+
+    const newBlog = {
+        title: "test blog",
+        author: "marielle",
+        url: "test.com",
+        likes: undefined
+    }
+
+    await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+    const response = await api.get('/api/blogs')
+    assert.equal(response.body[2].likes , 0)
+    
+    })
 
 
 after(async () => {
