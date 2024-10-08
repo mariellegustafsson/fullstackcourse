@@ -7,7 +7,7 @@ const config = require('./utils/config')
 const logger = require('./utils/logger')
 const blogsRouter = require('./controllers/blogs')
 const middleware = require('./utils/middleware')
-const Person = require('./models/blog')
+const Blog = require('./models/blog')
 
 
 
