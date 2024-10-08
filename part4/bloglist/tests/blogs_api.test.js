@@ -1,15 +1,40 @@
-const { test, after } = require('node:test')
+const { test, after, beforeEach } = require('node:test')
 const assert = require('node:assert')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
+const Blog = require('../models/blog')
+
+
+const initialBlogs = [
+    {
+        title: "my best recipe",
+        author: "wilma",
+        url: "recipes.com",
+        likes: 7
+    },
+    {
+        title: "outfit of the day",
+        author: "agnes",
+        url: "fashion.com",
+        likes: 3
+    },
+  ]
+
+  beforeEach(async () => {
+    await Blog.deleteMany({})
+    let blogObject = new Blog(initialBlogs[0])
+    await blogObject.save()
+    blogObject = new Blog(initialBlogs[1])
+    await blogObject.save()
+  })
 
 
 
-test.only('there are six blogs', async () => {
+test.only('there are two blogs', async () => {
     const response = await api.get('/api/blogs')
-    assert.strictEqual(response.body.length, 6)
+    assert.strictEqual(response.body.length, 2)
   })
   
 
@@ -40,6 +65,7 @@ test.only("a new blogpost can be created", async () => {
     assert.equal(response.body.length, initialAmount+1)
     
     })
+
 
 
 after(async () => {
