@@ -129,6 +129,30 @@ test("when a new blogpost is created with the likes property missing, default is
     
     })
 
+    test.only("a new user is not created when username is too short", async () => {
+
+        const newUser = {
+            username: "A",
+            name: "Anna",
+            password: "potato"
+
+        }
+        
+        const initialResponse = await api.get('/api/users')
+        const initialAmount = initialResponse.body.length
+    
+        await api
+        .post('/api/users')
+        .send(newUser)
+        .expect(400)
+        .expect('Content-Type', /application\/json/)
+    
+        const response = await api.get('/api/users')
+        assert.equal(response.body.length, initialAmount)
+        
+        })
+
+
 
 after(async () => {
     await mongoose.connection.close()
