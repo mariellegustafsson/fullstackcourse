@@ -3,8 +3,9 @@ Content-Type: application/json
 
 
 {
-  "title": "my day",
-  "author": "agnes",
-  "url": "blog.com",
-  "likes": 5
+  "title": "test",
+  "author": "marielle",
+  "url": "test.com",
+  "likes": 10,
+  "userId": "67066824c7d25a63222fe224"
 }
