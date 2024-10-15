@@ -1,7 +1,7 @@
-
 import nameService from '../services/name'
-const addNames = ({newName}, {persons}, {newNumber}, {setPersons}) => {
 
+const addNames = ({newName}, {persons}, {newNumber}, {setPersons}, {setMessage}) => {
+console.log("entered addNames")
 if (persons.some((person) => newName === person.name)){ 
   alert(`${newName} already in phonebook`)
 }
@@ -11,6 +11,11 @@ else{
   .then(returnedObject => {
     setPersons(persons.concat(returnedObject))
   })
+  setMessage(`added ${newName}`)
+  setTimeout(() => {
+    setMessage(null)
+  }, 5000)
+  
 }}
 
 

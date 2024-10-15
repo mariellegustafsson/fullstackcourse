@@ -4,6 +4,7 @@ import addNames from './components/addnames'
 import RenderNames from './components/renderNames'
 import axios from 'axios'
 import nameService from './services/name'
+import Notification from './components/Notification'
 
 
 const App = () => {
@@ -13,11 +14,13 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchName, setSearchName] = useState('')
+  const [Message, setMessage] = useState(null)
 
 
   const handleNameChange = (event) => {
     console.log(event.target.value)
     setNewName(event.target.value)
+    console.log("new name set: ", newName)
   }
 
   const handleNumberChange = (event) =>{
@@ -31,8 +34,10 @@ const App = () => {
 
   const addName = (event) => {
     event.preventDefault()
-    console.log('button clicked', event.target)
-    addNames({newName}, {persons}, {newNumber}, {setPersons})
+    console.log('button clicked 2', event.target)
+    console.log('newName: ', newName)
+    addNames({newName}, {persons}, {newNumber}, {setPersons}, {setMessage})
+
   }
 
 
@@ -47,6 +52,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={Message} />
       <div> 
         filter shown with <input value={searchName} onChange={handleSearchChange}/>
       </div>
@@ -63,10 +69,11 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <ul>
-        <RenderNames names={namefilter({persons}, {searchName})} />
+        <RenderNames names={persons} />
       </ul>
     </div>
   )
 }
+//<RenderNames names={namefilter({persons}, {searchName})} />
 
 export default App

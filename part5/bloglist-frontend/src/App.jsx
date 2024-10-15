@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef} from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import './index.css'
+import Togglable from './components/Togglable'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -15,20 +16,7 @@ const App = () => {
   const[newUrl, setNewUrl] = useState('')
   const [Message, setMessage] = useState(null)
 
-  const handleTitleChange = (event) =>{
-    console.log(event.target.value)
-    setNewTitle(event.target.value)
-  }
-
-  const handleAuthorChange = (event) =>{
-    console.log(event.target.value)
-    setNewAuthor(event.target.value)
-  }
-
-  const handleUrlChange = (event) =>{
-    console.log(event.target.value)
-    setNewUrl(event.target.value)
-  }
+  const blogFormRef = useRef()
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogAppUser')
@@ -60,6 +48,7 @@ const App = () => {
     }}
 
 const addBlog = async (event) => {
+  blogFormRef.current.toggleVisibility()
   event.preventDefault()
   console.log("button clicked")
   const blogObject = {
@@ -138,14 +127,16 @@ return (
 
 <Notification message={Message}/>
 
+<Togglable buttonLabel="create new blog" ref={blogFormRef}>
 <form onSubmit={addBlog}>
-        <div> title: <input value={newTitle} onChange={handleTitleChange}/></div>
-        <div>author: <input value={newAuthor} onChange={handleAuthorChange}/></div>
-        <div>url: <input value={newUrl} onChange={handleUrlChange}/></div>
+        <div> title: <input value={newTitle} onChange={event => setNewTitle(event.target.value)}/></div>
+        <div>author: <input value={newAuthor} onChange={event => setNewAuthor(event.target.value)}/></div>
+        <div>url: <input value={newUrl} onChange={event => setNewUrl(event.target.value)}/></div>
         <div>
-          <button type="submit">add</button>
+          <button type="submit">create</button>
         </div>
       </form>
+    </Togglable>
 
       <h2>blogs</h2>
       <p>{user.username} is logged in <button onClick={logout}>log out</button></p>
