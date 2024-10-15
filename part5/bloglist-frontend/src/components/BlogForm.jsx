@@ -20,20 +20,12 @@ const BlogForm = ({createBlog}) =>{
         setNewTitle('')
         setNewAuthor('')
         setNewUrl('')
-
-        const message = `${blogObject.title} by ${blogObject.author} added to the bloglist`;
-        setSuccessMessage(message);
-        setTimeout(() => {
-          setSuccessMessage("")
-        }, 5000)
-        console.log(successMessage)
  
       }
 
         
 return(
     <div>
-    <Notification message={successMessage}/>
 <form onSubmit={addBlog}>
 
         <div> title: <input value={newTitle} onChange={event => setNewTitle(event.target.value)}/></div>
@@ -48,5 +40,6 @@ return(
 )
 
 }
+
 
 export default BlogForm

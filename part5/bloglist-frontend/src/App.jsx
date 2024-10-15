@@ -7,6 +7,7 @@ import Togglable from './components/Togglable'
 import BlogForm from './components/BlogForm'
 import Notification from './components/Notification'
 
+
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('') 
@@ -54,6 +55,13 @@ const App = () => {
           setBlogs(blogs.concat(returnedBlog))
           blogFormRef.current.toggleVisibility()
         })
+
+        const m = `${blogObject.title} by ${blogObject.author} added to the bloglist`;
+        setMessage(m);
+        setTimeout(() => {
+          setMessage("")
+        }, 5000)
+        console.log(Message)
     }
 
 
