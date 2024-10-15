@@ -31,11 +31,3 @@ const showMore = { display: visible ? '' : 'none' }
 
 export default Blog
 
-
-/* detta fungerar
- return(
-  <div style={blogStyle}>
-    {blog.title} {blog.author}
-  </div>  
-)
-  */
