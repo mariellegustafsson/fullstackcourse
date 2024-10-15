@@ -21,18 +21,21 @@ const BlogForm = ({createBlog}) =>{
         setNewAuthor('')
         setNewUrl('')
 
-        setSuccessMessage(`${blogObject.title} by ${blogObject.author} added to the bloglist`)
+        const message = `${blogObject.title} by ${blogObject.author} added to the bloglist`;
+        setSuccessMessage(message);
         setTimeout(() => {
-          setSuccessMessage(null)
+          setSuccessMessage("")
         }, 5000)
+        console.log(successMessage)
  
       }
 
         
 return(
-    
+    <div>
+    <Notification message={successMessage}/>
 <form onSubmit={addBlog}>
-<Notification message={successMessage}/>
+
         <div> title: <input value={newTitle} onChange={event => setNewTitle(event.target.value)}/></div>
         <div>author: <input value={newAuthor} onChange={event => setNewAuthor(event.target.value)}/></div>
         <div>url: <input value={newUrl} onChange={event => setNewUrl(event.target.value)}/></div>
@@ -40,7 +43,7 @@ return(
           <button type="submit">create</button>
         </div>
       </form>
-
+      </div>
 
 )
 
