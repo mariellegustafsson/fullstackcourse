@@ -40,14 +40,14 @@ const likeClick = () =>{
 
   return(
     <div style={blogStyle}>
+      {blog.title} {blog.author}
   <div style={showLess}>
-    {blog.title} <button onClick={()=>SetVisible(true)}>view</button>
+     <button onClick={()=>SetVisible(true)}>view</button>
   </div>  
   <div style={showMore}>
-  {blog.title} <button onClick={()=>SetVisible(false)}>hide</button> 
+  <button onClick={()=>SetVisible(false)}>hide</button> 
   <br/>{blog.url} 
   <br/> likes {likes} <button onClick={likeClick}>like</button>
-  <br/>{blog.author}
   <br/> <button onClick={removeClick}>remove</button>
   </div>
   </div>

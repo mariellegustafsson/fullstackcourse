@@ -28,9 +28,9 @@ return(
     <div>
 <form onSubmit={addBlog}>
 
-        <div> title: <input value={newTitle} onChange={event => setNewTitle(event.target.value)}/></div>
-        <div>author: <input value={newAuthor} onChange={event => setNewAuthor(event.target.value)}/></div>
-        <div>url: <input value={newUrl} onChange={event => setNewUrl(event.target.value)}/></div>
+        <div> title: <input value={newTitle} onChange={event => setNewTitle(event.target.value)} placeholder='blogpost title'/></div>
+        <div>author: <input value={newAuthor} onChange={event => setNewAuthor(event.target.value)} placeholder='blogpost author'/></div>
+        <div>url: <input value={newUrl} onChange={event => setNewUrl(event.target.value)} placeholder='blogpost url'/></div>
         <div>
           <button type="submit">create</button>
         </div>
