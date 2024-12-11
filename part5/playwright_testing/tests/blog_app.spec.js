@@ -3,8 +3,8 @@ const { test, expect, beforeEach, describe } = require('@playwright/test')
 describe('Blog app', () => {
 
     beforeEach(async ({ page, request }) => {
-        await request.post('http://localhost:3003/api/testing/reset')
-        await request.post('http://localhost:3003/api/users', {
+        await request.post('http://localhost:5173/api/testing/reset')
+        await request.post('http://localhost:5173/api/users', {
           data: {
             name: 'Marielle G',
             username: 'marielle',
