@@ -23,11 +23,11 @@ describe('Blog app', () => {
         await expect(page.getByText('password')).toBeVisible()
         })
 
-  test('login form can be opened', async ({ page }) => {
+  test('login works', async ({ page }) => {
 
     await page.getByRole('button', { name: 'login' }).click()
-    await page.getByRole('textbox').first().fill('agnes112')
-    await page.getByRole('textbox').last().fill('apple')
+    await page.getByRole('textbox').first().fill('marielle')
+    await page.getByRole('textbox').last().fill('secret')
     await page.getByRole('button', { name: 'login' }).click()
   
   
