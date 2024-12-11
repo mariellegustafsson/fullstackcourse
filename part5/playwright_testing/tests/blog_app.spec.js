@@ -31,12 +31,12 @@ describe('Blog app', () => {
     await page.getByRole('button', { name: 'login' }).click()
   
   
-    await expect(page.getByText('agnes112 is logged in')).toBeVisible()
+    await expect(page.getByText('marielle is logged in')).toBeVisible()
 
   })
   test('login fails with wrong credentials', async ({ page }) => {
     await page.getByRole('button', { name: 'login' }).click()
-    await page.getByRole('textbox').first().fill('agnes112')
+    await page.getByRole('textbox').first().fill('marielle')
     await page.getByRole('textbox').last().fill('wrong')
     await page.getByRole('button', { name: 'login' }).click()
 // I expect that the user is not logged in if the log in page is still visible after trying to login
