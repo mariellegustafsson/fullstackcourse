@@ -25,8 +25,16 @@ const likeClick = () =>{
     url: blog.url
   }
    blogService.addLike(blog.id, updatedBlog)
+   .then(returnedBlog => {
+
+    const updatedBlogs = blogs
+      .map(b => b.id === returnedBlog.id ? returnedBlog : b)
+      .sort((a, b) => b.likes - a.likes)
+
+    setBlogs(updatedBlogs)
+
    setLikes(likes+1)
-  }
+  })}
 
   const removeClick = () => {
     if (window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)){
