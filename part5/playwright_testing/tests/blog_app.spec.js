@@ -84,12 +84,31 @@ test('a new blog can be created', async ({ page }) => {
         await page.getByRole('button', { name: 'view' }).click()
         await page.getByRole('button', { name: 'remove' }).waitFor()
         await page.getByRole('button', { name: 'remove' }).click()
-        console.log("kom ända hit")
-    
-
         await expect(page.getByText('my day rebecca')).not.toBeVisible()
 
   }) 
+
+  test('only a user that created the blog can see the remove button', async ({page, request}) =>{
+
+    // first a new user is added
+    await request.post('http://localhost:5173/api/users', {
+        data: {
+          name: 'Simon W',
+          username: 'simon',
+          password: 'abc123'
+        }
+      })
+
+    await page.getByRole('button', { name: 'log out' }).click()
+    await page.getByRole('button', { name: 'login' }).waitFor()
+    await loginWith(page, 'simon', 'abc123')
+    await page.getByText('simon is logged in').waitFor()
+    await page.getByRole('button', { name: 'view' }).click()
+    await page.getByRole('button', { name: 'like' }).waitFor()
+    await expect(page.getByRole('button', { name: 'remove' })).not.toBeVisible()
+
+  })
+  
 })
 
 })
