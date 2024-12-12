@@ -76,9 +76,22 @@ test('a new blog can be created', async ({ page }) => {
         await expect(page.getByText('likes 1')).toBeVisible()
 
     })
+    test('a note can be removed', async ({ page }) => { 
+        page.on('dialog', async (dialog) => {
+            console.log(dialog.message()) 
+            await dialog.accept()
+          })
+        await page.getByRole('button', { name: 'view' }).click()
+        await page.getByRole('button', { name: 'remove' }).waitFor()
+        await page.getByRole('button', { name: 'remove' }).click()
+        console.log("kom ända hit")
+    
+
+        await expect(page.getByText('my day rebecca')).not.toBeVisible()
 
   }) 
 })
 
 })
  
+})
