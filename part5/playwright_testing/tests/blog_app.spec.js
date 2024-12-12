@@ -41,6 +41,7 @@ describe('Blog app', () => {
   describe('when logged in', () => {
     beforeEach(async ({ page }) => {
         await loginWith(page, 'marielle', 'secret')
+        await page.getByText('marielle is logged in').waitFor()
     })
 
 
@@ -53,20 +54,28 @@ test('a new blog can be created', async ({ page }) => {
     await createBlog(page, content)
 
     await expect(page.getByText(`${content.title} ${content.author}`)).toBeVisible();
-  }) // problem: det blir jwt tokenerror
-
+  }) 
   
   describe('and a note exists', () => {
     beforeEach(async ({ page }) => {
-        content = {
+        const content = {
             title: 'my day',
             author: 'rebecca',
             url: 'life.com'
         }
         await createBlog(page, content)
+        await page.getByRole('button', { name: 'view' }).waitFor()
     })
 
-    //test('a blogpost can be liked', async ({ page }) => { })
+    test('a blogpost can be liked', async ({ page }) => { 
+        //await expect(page.getByText('marielle is logged in')).toBeVisible()
+        await page.getByRole('button', { name: 'view' }).click()
+        await page.getByRole('button', { name: 'like' }).waitFor()
+        await expect(page.getByText('likes 0')).toBeVisible()
+        await page.getByRole('button', { name: 'like' }).click()
+        await expect(page.getByText('likes 1')).toBeVisible()
+
+    })
 
   }) 
 })
